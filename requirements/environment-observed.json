@@ -1,0 +1,25 @@
+{
+  "purpose": "Observed development environment; not a lockfile or certification of every historical experiment",
+  "captured_utc": "2026-10-29",
+  "python": "3.10.13",
+  "os": "Ubuntu 20.04.6 LTS",
+  "cuda_toolkit": "11.8",
+  "packages": {
+    "torch": "2.1.0+cu118",
+    "torchvision": "0.16.0+cu118",
+    "numpy": "1.26.4",
+    "mmcv": "2.1.0",
+    "mmengine": "0.10.7",
+    "mmsegmentation": "1.2.2",
+    "mmdet": "3.3.0",
+    "timm": "0.4.12",
+    "spconv-cu118": "2.3.8",
+    "cumm-cu118": "0.7.11",
+    "selective-scan": "0.0.2",
+    "torch-scatter": "2.1.2+pt21cu118",
+    "kornia": "0.6.5"
+  },
+  "gpu_observed": "NVIDIA A100-PCIE-40GB",
+  "driver_observed": "535.230.02",
+  "paper_reported_gpu": "NVIDIA A100 80 GB (historical manuscript; different from current host)"
+}

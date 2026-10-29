@@ -1,0 +1,25 @@
+services:
+  research:
+    image: monodor:cu118
+    build:
+      context: ..
+      dockerfile: docker/release.Dockerfile
+      args:
+        TORCH_CUDA_ARCH_LIST: ${TORCH_CUDA_ARCH_LIST:-8.0}
+        MAX_JOBS: ${MAX_JOBS:-2}
+    gpus: all
+    shm_size: '16gb'
+    stdin_open: true
+    tty: true
+    volumes:
+      - type: bind
+        source: ${KITTI_ROOT:?Set KITTI_ROOT in docker/.env}
+        target: /workspace/monodor/data/kitti
+        read_only: true
+      - type: bind
+        source: ${CHECKPOINT_ROOT:?Set CHECKPOINT_ROOT in docker/.env}
+        target: /workspace/monodor/checkpoints
+        read_only: true
+      - type: bind
+        source: ${OUTPUT_ROOT:?Set OUTPUT_ROOT in docker/.env}
+        target: /workspace/monodor/output

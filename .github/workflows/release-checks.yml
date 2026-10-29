@@ -1,0 +1,32 @@
+name: Release source checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      build_image:
+        description: Also build the CUDA development image (slow, no GPU inference)
+        required: false
+        default: false
+        type: boolean
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install PyYAML==6.0.3
+      - run: python scripts/release/check_source.py
+      - run: python scripts/release/export_source.py
+      - run: python release-dist/source/scripts/release/check_source.py
+  docker:
+    if: github.event_name == 'workflow_dispatch' && inputs.build_image
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build --build-arg MAX_JOBS=2 -f docker/release.Dockerfile -t monodor-release-check .
