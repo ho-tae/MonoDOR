@@ -7,7 +7,7 @@
     ".github/workflows/release-checks.yml": "34ba09cdd923339b49a73be79fe36c89f42442dba33968e7391278941646b670",
     ".gitignore": "afdc959f0a2aeaae3ded82685395d8f03f36c6935804d93b26bbe86faea36dfa",
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
-    "README.md": "09e2380ee29bf8540f56e4f29964bf97bec82e0470c772bf45fe4fa74ebbd15a",
+    "README.md": "4fd9a892c6ed9f72c8feee10a90460ac5bf80ab9bf4003e0f6502e343e95ef36",
     "VMamba/.gitignore": "4a65f923cd8d37bcafab92634f984eb59a5854218dc7a7ab9a689063452bc81b",
     "VMamba/LICENSE": "fb8d4c2d5c5bc007e3176259bde6647bbb2a7a017eaab52f4a86e44d86c61076",
     "VMamba/README.md": "2df2c08ed58a03423147f1c5548de9e6ad8599b0f1132cf5b78e2f020239231f",
@@ -1856,7 +1856,7 @@
     "requirements/release-cu118.txt": "377caa97e06e2d7d9567e3a0abc0648341f094687dd8c3e344a6d5c4d020f02a",
     "scripts/release/check_environment.py": "5aac34832c4d73297fb5bf06bdced6431012cc5855b4f3abf86b22dfa61161ec",
     "scripts/release/check_source.py": "dea9186a4a4dc880829fce90b606ba65c248bccc5e649fca0125765b56b8de07",
-    "scripts/release/export_source.py": "71db4b9d5d52c83f100be338fedafd69a3ab42e8076711a7d9bcfd1de594fb1f",
+    "scripts/release/export_source.py": "4c90235cb612a5ea5356fcebd3724d606b7c0059ebeca29bcacc3118d6418a08",
     "scripts/release/install.sh": "c4403ea5d6bc5001e9d8faa712c8b93d63d62875c131f4a69c450bb30491959d",
     "scripts/release/prepare_kitti.py": "5d3bdd816b7dea9483c07e70051e5c703fdf8e3deb1889075d5596edbebfc8c0",
     "scripts/release/run.sh": "c57d189f129dc25a6a380fa02db076f59f740cdb37bd230bb88122e9ac929832",
@@ -1941,6 +1941,7 @@
     "tools/train_utils/optimization/learning_schedules_fastai.py": "2e36173d80ee9f190a783c35b9c76f93d9913a8afe9a3611558e8e4598b38ce2",
     "tools/train_utils/train_utils.py": "ead12db24faa2d64d5140b3fb5b17c56147e98edde34c52f367fb7ed97c5d9ed",
     "tools/visual_utils/open3d_vis_utils.py": "b2263d40b700b2e50df268ffbfe34c88b517e36889a4382882a3f9aaa1d8de4f",
-    "tools/visual_utils/visualize_utils.py": "2d99e53e0c19dd81e407197a247c9fa343553d53d521f385ae71c0661befa055"
+    "tools/visual_utils/visualize_utils.py": "2d99e53e0c19dd81e407197a247c9fa343553d53d521f385ae71c0661befa055",
+    "docs/assets/overview.png": "a95842bc97da778790ef44140dfbba668d9ebb6006dd9b60a33f437db5824a5c"
   }
 }

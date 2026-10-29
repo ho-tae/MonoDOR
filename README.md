@@ -14,15 +14,16 @@ MonoDOR is the code-release name for the VMamba-based detector with depth-aware 
 
 ## Overview
 
-The implementation builds on OpenPCDet/CaDDN and VMamba. Image features are lifted into a depth-indexed frustum, transformed into a voxel representation, refined using predicted occupancy, and passed to a BEV detection head.
+MonoDOR combines depth-guided feature lifting and occupancy-aware refinement to address depth ambiguity and background interference in monocular 3D detection. The complete architecture from the paper is shown below.
 
-```text
-RGB image → VMamba / UPerNet → depth-guided frustum features
-                                      ↓ calibration
-                              voxel features + OAE
-                                      ↓
-                            BEV backbone → 3D boxes
-```
+![Overall architecture of MonoDOR: VMamba image features, depth-aware enhancement, frustum occupancy gating, voxel projection, occupancy-aware enhancement, and 3D detection.](docs/assets/overview.png)
+
+*Figure 1 from the manuscript. A single RGB image is transformed into depth-aware frustum features and occupancy-refined voxel features for 3D bounding-box and class prediction. [View the full-resolution overview](docs/assets/overview.png).*
+
+1. **Image feature extraction.** A VMamba backbone extracts image features with long-range spatial context. Channel reduction produces a compact representation for 3D lifting, while the depth head estimates a categorical depth distribution at each image location.
+2. **Depth-aware enhancement (DAE).** The predicted depth distribution weights the image features along the depth dimension to construct a frustum-aligned feature volume. The depth-probability addition shown in the diagram enriches this representation before occupancy refinement.
+3. **Occupancy-aware enhancement (OAE).** A frustum occupancy block predicts spatial weights that modulate the frustum features. Calibration-guided grid sampling maps the enhanced frustum into a voxel grid, where a voxel occupancy block further refines the features through occupancy-weighted multiplication.
+4. **3D detection.** The refined voxel representation is collapsed into BEV features and processed by the detection backbone and head to predict object classes, 3D box locations, dimensions, and orientations. The implementation builds on OpenPCDet/CaDDN and VMamba.
 
 The model uses **RGB images and calibration at inference**. Training uses LiDAR-derived depth and occupancy supervision together with detection annotations. The current KITTI loader also reads point/depth files during validation; the supplied evaluation command therefore expects the prepared dataset, even though measured depth and points are not model inference inputs.
 

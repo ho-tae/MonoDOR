@@ -9,6 +9,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[2]
 PUBLIC_DOCS = {"README.md", "docs/REPRODUCING.md", "docs/README_ko.md",
                "docs/RESULTS.md", "docs/RELEASE.md", "docs/VALIDATION.md"}
+PUBLIC_ASSETS = {"docs/assets/overview.png"}
 ROOT_FILES = {"LICENSE", "setup.py", "requirements.txt", ".gitignore", ".dockerignore"}
 EXCLUDED_SUFFIXES = {".pdf", ".docx", ".pth", ".pt", ".pkl", ".bin", ".zip", ".so", ".pyc"}
 
@@ -21,7 +22,7 @@ def allowed(name):
         return False
     if path.name.startswith(".env") and path.name != ".env.example":
         return False
-    return (name in PUBLIC_DOCS | ROOT_FILES
+    return (name in PUBLIC_DOCS | PUBLIC_ASSETS | ROOT_FILES
             or name.startswith(("pcdet/", "VMamba/", "tools/", "configs/release/",
                                 "scripts/release/", "requirements/"))
             or name in {"docker/release.Dockerfile", "docker/compose.yaml", "docker/.env.example", "docker/README.md",
@@ -36,7 +37,7 @@ def main():
     if destination.exists():
         raise FileExistsError(f"Refusing to overwrite {destination}; select a new --output path")
     tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode().split("\0")
-    candidates = set(tracked) | PUBLIC_DOCS | ROOT_FILES
+    candidates = set(tracked) | PUBLIC_DOCS | PUBLIC_ASSETS | ROOT_FILES
     for directory in ("configs/release", "scripts/release", "requirements", "docker", ".github/workflows"):
         candidates.update(str(p.relative_to(ROOT)) for p in (ROOT / directory).rglob("*") if p.is_file())
     selected = [name for name in sorted(candidates) if name and allowed(name) and (ROOT / name).is_file()]
